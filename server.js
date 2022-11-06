@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cookie = require('cookie');
 // const rateLimit = require('express-rate-limit');
 const jwt = require('jsonwebtoken');
+const { error } = require('console');
 
 
 
@@ -120,6 +121,27 @@ app.prepare().then(() => {
             
         }
     );
+
+
+    // contact form insert api 
+
+    server.post("/api/contact", (req, res) => {
+
+        const { name, email, phone, cat, message } = req.body;
+        // sql query
+        const sql = "INSERT INTO `contactlist`(`name`, `email`, `phone`, `cat`, `message`) VALUES (" + `'${name}','${email.toLowerCase()}','${phone}','${cat}','${message}')`
+
+        connection.query(sql, function (error, results) {
+            if (error) {
+                res.status(404).json({ "status": false, "message": error.message })
+
+            } else if (results) {
+                res.status(200).json({ "status": true, "message" : "Your Contact Request Successfully sent"})
+
+            }
+
+        });
+});
 
     //  check api 
 

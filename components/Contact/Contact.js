@@ -1,12 +1,28 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { postData } from "../../GolobalFunction/Golobalfunction";
 
 
 
 const Contact = () => {
-    const [formData, setFormData] = useState();
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState();
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+setLoading(true)
+        postData('/api/contact', data)
+            .then((data) => {
+                setLoading(false)
+                setStatus(data)
+            })
+            .catch((err)=>{
+                setLoading(false)
+                setStatus(data)
+            })
+
+
+    }
 
     return (
         <div className="bg-[#FFFBEC]">
@@ -58,30 +74,69 @@ const Contact = () => {
                 <div className="lg:px-20">
                     <h1 className="text-3xl font-bold text-secondColor mb-5 text-center lg:text-left">Send us Message</h1>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+               { !status?.status ?
 
-                        <input placeholder="Name" className="inputDefault" type="text" {...register("name", { required: true, maxLength: 30 })} />
+               <>
+                        <form onSubmit={handleSubmit(onSubmit)}>
 
-
-                        <div className="flex gap-3">
-                            <div className="lg:w-1/2">
-                                <input placeholder="Email" className="inputDefault" type="text" {...register("email", { required: true, maxLength: 30 })} />
+                            <div>
+                                {errors.name && <p className="text-red-700 w-full">{errors.name?.message}</p>}
+                                <input placeholder="Name" className="inputDefault" type="text" {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: "Name field Required"
+                                    }, maxLength: 30
+                                })} />
                             </div>
-                            <div className="lg:w-1/2">
-                                <input placeholder="Phone Number" className="inputDefault" type="text" {...register("phone", { required: true, maxLength: 30 })} />
+
+
+                            <div className="flex gap-3">
+                                <div className="lg:w-1/2">
+                                    <input placeholder="Email" className="inputDefault" type="text" {...register("email")} />
+                                </div>
+                                <div className="lg:w-1/2">
+                                    <div>
+                                        {errors.phone && <p className="text-red-700 w-full">{errors.phone?.message}</p>}
+                                        <input placeholder="Phone Number" className="inputDefault" type="text" {...register("phone", {
+                                            required: {
+                                                value: true,
+                                                message: "Phone field Required"
+                                            }, maxLength: 15
+                                        })} />
+                                    </div>
+                                </div>
+
                             </div>
 
-                        </div>
+
+                            <div>
+                                {errors.cat && <p className="text-red-700 w-full">{errors.cat?.message}</p>}
+                                <input className="inputDefault" type="text" {...register("cat", {
+                                    required: {
+                                        value: true,
+                                        message: "Category field Required"
+                                    }
+                                })} />
+                            </div>
 
 
-                        <input className="inputDefault" type="text" {...register("cat", { required: true, maxLength: 30 })} />
+                            <textarea placeholder="message" className="inputDefault" type="text" {...register("message", {
+                                required: {
+                                    value: true,
+                                    message: "Message field Required"
+                                }, maxLength: 1000
+                            })} />
 
+                               <div>
+                                    {status?.message && <p className="text-red-700 font-bold py-10 text-center">{status.message}</p>}
+                                    <button className="btn-send" type="submit">
+                                        {loading ? <div className="flex justify-center items-center"><span className="animate-spin h-5 w-5 mr-3 border-4 rounded-full border-t-2 border-t-gray-500 block"></span><span>Processing...</span></div> : "Submit"}
+                                    </button>
+                               </div>
+                        </form>
+               </> : <p className="text-green-700 font-bold py-10 text-center">{status.message}</p>
 
-                        <textarea placeholder="message" className="inputDefault" type="text" {...register("message", { required: true, maxLength: 30 })} />
-
-
-                        <button className="btn-send" type="submit">Send</button>
-                    </form>
+               }
 
 
 
