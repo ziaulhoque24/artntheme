@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "inprocess",
+        "tailwindcss"
+    ],
+        "css.validate": false,
+        "tailwindCSS.emmetCompletions": true
+}
