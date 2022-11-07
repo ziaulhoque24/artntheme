@@ -12,7 +12,7 @@ const LeadSection = () => {
                     <div className="font-bold text-2xl text-secondColor text-center lg:text-left xl:text-4xl">Competitive Pricing & Amazing Customer Service</div>
                     <div className="my-3 text-sm lg:text-base">art  N theme is a brand name for Digital agency in Bangladesh. We provide a wide comprehensive range of Graphic Design, Motion Graphics, 2D/3D animation, Multimedia, SEO, Social Media Marketing and Printing Services. We have been in this field since 2019, Client satisfaction is our objective and quality service is our commitment. We are a Creative Team to Provide you with Quality service.</div>
                     <div className='flex justify-center gap-4'>
-                        <button className="w-40 py-2 px-4 bg-myColor rounded-lg text-white font-bold">Contact Us</button>
+                        <Link href="/contact"><button className="w-40 py-2 px-4 bg-myColor rounded-lg text-white font-bold">Contact Us</button></Link>
                         <Link target="_blank" href="https://wa.me/message/DVRG6MSZCLENM1?sro
 qr"><button className="flex items-center justify-center w-40 py-2 px-2 bg-[#4CC75A] rounded-lg text-white font-bold gap-3"><BsWhatsapp className='text-xl'/> WhatsApp</button></Link>
                     </div>

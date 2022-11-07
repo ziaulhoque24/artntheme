@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import ClientListSection from '../components/ClientListSection/ClientListSection'
+import FooterContact from '../components/Contact/FooterContact'
 import Footer from '../components/HeaderFooter/Footer'
 import Header from '../components/HeaderFooter/Header'
 import LeadSection from '../components/LeadSection/LeadSection'
@@ -20,6 +21,7 @@ export default function Home() {
         <SocialMediaSection/>
       </div>
       <ClientListSection/>
+      <FooterContact/>
       <Footer/>
 
     </>

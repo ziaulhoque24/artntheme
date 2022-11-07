@@ -17,15 +17,15 @@ if(val === "out"){
     }
     return (
         
-        <div className="bg-theme">
-            <div className="container sticky top-0">
+        <div className="bg-theme sticky top-0 z-10">
+            <div className="container">
                 <div className="flex justify-between items-center py-6">
                     <div className="lg:hidden" onClick={()=>handleMenu("in")}><CgMenuLeft className="text-[1.5em]" /></div>
                     <div className=""><Link href="/"><Image src={logo} alt="" width={200} layout="responsive" /></Link></div>
                     <div className="lg:hidden"></div>
                     <div className="hidden lg:inline-block"><div className="flex justify-center items-center gap-4 font-bold">
                         <Link href="/"><span>Home</span></Link>
-                        <Link href="/"><span>Services</span></Link>
+                        <Link href="/services"><span>Services</span></Link>
                         <Link href="https://artntheme.com" target="_blank"><span>Shop</span></Link>
                         <Link href="/contact"><span>Contact</span></Link>
                         
